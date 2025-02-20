@@ -13,6 +13,7 @@ import { BookingList } from './pages/agent/BookingList';
 import { CustomerLayout } from './layouts/CustomerLayout';
 import { BookingProcess } from './pages/customer/BookingProcess';
 import { MyBookings } from './pages/customer/MyBookings';
+import { routes } from './routes';
 
 const App = () => {
   return (
@@ -20,9 +21,9 @@ const App = () => {
       <Router>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/hotels" element={<HotelSearch />} />
+            <Route path={routes.home} element={<Home />} />
+            <Route path={routes.login} element={<Login />} />
+            <Route path={routes.hotels} element={<HotelSearch />} />
           </Route>
 
           <Route
@@ -32,10 +33,10 @@ const App = () => {
               </ProtectedRoute>
             }
           >
-            <Route path="/agent/dashboard" element={<Dashboard />} />
-            <Route path="/agent/hotels" element={<HotelManagement />} />
-            <Route path="/agent/rooms" element={<RoomManagement />} />
-            <Route path="/agent/bookings" element={<BookingList />} />
+            <Route path={routes.agentDashboard} element={<Dashboard />} />
+            <Route path={routes.agentHotel} element={<HotelManagement />} />
+            <Route path={routes.agentRooms} element={<RoomManagement />} />
+            <Route path={routes.agentBooking} element={<BookingList />} />
           </Route>
 
           <Route
@@ -45,8 +46,8 @@ const App = () => {
               </ProtectedRoute>
             }
           >
-            <Route path="/booking" element={<BookingProcess />} />
-            <Route path="/my-bookings" element={<MyBookings />} />
+            <Route path={routes.booking} element={<BookingProcess />} />
+            <Route path={routes.myBookings} element={<MyBookings />} />
           </Route>
         </Routes>
       </Router>
