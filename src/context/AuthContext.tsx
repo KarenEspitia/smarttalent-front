@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from "react";
-import { AuthContextType, AuthState, UserData } from "./types/auth.types";
+import { createContext, useContext, useState, ReactNode } from 'react';
+import { AuthContextType, AuthState, UserData } from './types/auth.types';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -16,30 +16,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setState({ ...state, loading: true, error: null });
       const mockUser: UserData = {
-        id: "1",
-        name: "Karen",
+        id: '1',
+        name: 'Karen',
         email: credentials.email,
-        role: credentials.email.includes("agent") ? "agent" : "customer",
+        role: credentials.email.includes('agent') ? 'agent' : 'customer',
       };
+
       setState({
         isAuthenticated: true,
         user: mockUser,
         loading: false,
         error: null,
       });
+      return mockUser;
     } catch (error) {
       setState({
         ...state,
         loading: false,
-        error: "Authentication Failed",
+        error: 'Authentication Failed',
       });
     }
   };
   const logout = () => {
     setState(initialState);
   };
-  const isAgent = () => state.user?.role === "agent";
-  const isCustomer = () => state.user?.role == "customer";
+  const isAgent = () => state.user?.role === 'agent';
+  const isCustomer = () => state.user?.role == 'customer';
 
   const value = {
     ...state,
@@ -54,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within and AuthProvider");
+    throw new Error('useAuth must be used within and AuthProvider');
   }
   return context;
 };

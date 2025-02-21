@@ -2,7 +2,7 @@ export interface UserData {
   id: string;
   name: string;
   email: string;
-  role: "agent" | "customer";
+  role: 'agent' | 'customer';
 }
 
 export interface AuthState {
@@ -13,7 +13,10 @@ export interface AuthState {
 }
 
 export interface AuthContextType extends AuthState {
-  login: (credentials: { email: string; password: string }) => Promise<void>;
+  login: (credentials: {
+    email: string;
+    password: string;
+  }) => Promise<UserData | undefined>;
   logout: () => void;
   isAgent: () => boolean;
   isCustomer: () => boolean;
