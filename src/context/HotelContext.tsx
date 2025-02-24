@@ -12,13 +12,14 @@ const initialState: HotelState = {
 
 export const HotelProvider = ({ children }: { children: ReactNode }) => {
   const [state, setState] = useState<HotelState>(initialState);
-  const createHotel = async (hotelData: Omit<Hotel, 'id' | 'rooms'>) => {
+  const createHotel = async (hotelData: Omit<Hotel, 'id' | 'rooms' | 'isActive'>) => {
     try {
       setState({ ...state, loading: true });
       const newHotel: Hotel = {
         ...hotelData,
         id: crypto.randomUUID(),
         rooms: [],
+        isActive: true,
       };
       setState((prevState) => ({
         ...prevState,

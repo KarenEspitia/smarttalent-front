@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { Booking, BookingContextType, BookingState } from './types/booking.types';
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -40,4 +40,12 @@ export const BookinkProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return <BookingContext.Provider value={value}>{children}</BookingContext.Provider>;
+};
+
+export const useBooking = () => {
+  const context = useContext(BookingContext);
+  if (context === undefined) {
+    throw new Error('UseBooking must be used within a BookingsProvider  ');
+  }
+  return context;
 };

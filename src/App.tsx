@@ -14,43 +14,49 @@ import { CustomerLayout } from './layouts/CustomerLayout';
 import { BookingProcess } from './pages/customer/BookingProcess';
 import { MyBookings } from './pages/customer/MyBookings';
 import { routes } from './routes';
+import { BookinkProvider } from './context/BookingContext';
+import { HotelProvider } from './context/HotelContext';
 
 const App = () => {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path={routes.home} element={<Home />} />
-            <Route path={routes.login} element={<Login />} />
-            <Route path={routes.hotels} element={<HotelSearch />} />
-          </Route>
+      <HotelProvider>
+        <BookinkProvider>
+          <Router>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route path={routes.home} element={<Home />} />
+                <Route path={routes.login} element={<Login />} />
+                <Route path={routes.hotels} element={<HotelSearch />} />
+              </Route>
 
-          <Route
-            element={
-              <ProtectedRoute roles={['agent']}>
-                <AgentLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path={routes.agentDashboard} element={<Dashboard />} />
-            <Route path={routes.agentHotel} element={<HotelManagement />} />
-            <Route path={routes.agentRooms} element={<RoomManagement />} />
-            <Route path={routes.agentBooking} element={<BookingList />} />
-          </Route>
+              <Route
+                element={
+                  <ProtectedRoute roles={['agent']}>
+                    <AgentLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path={routes.agentDashboard} element={<Dashboard />} />
+                <Route path={routes.agentHotel} element={<HotelManagement />} />
+                <Route path={routes.agentRooms} element={<RoomManagement />} />
+                <Route path={routes.agentBooking} element={<BookingList />} />
+              </Route>
 
-          <Route
-            element={
-              <ProtectedRoute roles={['customer']}>
-                <CustomerLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path={routes.booking} element={<BookingProcess />} />
-            <Route path={routes.myBookings} element={<MyBookings />} />
-          </Route>
-        </Routes>
-      </Router>
+              <Route
+                element={
+                  <ProtectedRoute roles={['customer']}>
+                    <CustomerLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path={routes.booking} element={<BookingProcess />} />
+                <Route path={routes.myBookings} element={<MyBookings />} />
+              </Route>
+            </Routes>
+          </Router>
+        </BookinkProvider>
+      </HotelProvider>
     </AuthProvider>
   );
 };

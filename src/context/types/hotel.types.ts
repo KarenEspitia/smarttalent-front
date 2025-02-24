@@ -23,7 +23,7 @@ export interface HotelState {
 }
 
 export interface HotelContextType extends HotelState {
-  createHotel: (hotel: Omit<Hotel, 'id' | 'rooms'>) => Promise<void>;
+  createHotel: (hotel: Omit<Hotel, 'id' | 'rooms' | 'isActive'>) => Promise<void>;
   updateHotel: (id: string, hotel: Partial<Hotel>) => Promise<void>;
   toggleHotelStatus: (id: string) => Promise<void>;
   addRoom: (hotelId: string, room: Omit<Room, 'id'>) => Promise<void>;
