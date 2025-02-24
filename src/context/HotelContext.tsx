@@ -5,10 +5,11 @@ const HotelContext = createContext<HotelContextType | undefined>(undefined);
 
 const initialState: HotelState = {
   hotels: [],
+  filteredHotels: [],
   loading: false,
   error: null,
 };
-//
+
 export const HotelProvider = ({ children }: { children: ReactNode }) => {
   const [state, setState] = useState<HotelState>(initialState);
   const createHotel = async (hotelData: Omit<Hotel, 'id' | 'rooms'>) => {
@@ -127,6 +128,29 @@ export const HotelProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const searchHotelsByCity = async (city: string) => {
+    try {
+      setState({ ...state, loading: true });
+
+      const availableHotels = state.hotels.filter(
+        (hotel) => hotel.city.toLowerCase() === city.toLowerCase()
+      );
+
+      setState((prevState) => ({
+        ...prevState,
+        filteredHotels: availableHotels,
+        loading: false,
+      }));
+    } catch (error) {
+      setState({
+        ...state,
+        error: 'Error al buscar el hotel',
+        loading: false,
+        filteredHotels: [],
+      });
+    }
+  };
+
   const value = {
     ...state,
     createHotel,
@@ -134,6 +158,7 @@ export const HotelProvider = ({ children }: { children: ReactNode }) => {
     toggleHotelStatus,
     addRoom,
     toggleRoomStatus,
+    searchHotelsByCity,
   };
 
   return <HotelContext.Provider value={value}>{children}</HotelContext.Provider>;

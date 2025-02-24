@@ -17,6 +17,7 @@ export interface Hotel {
 
 export interface HotelState {
   hotels: Hotel[];
+  filteredHotels: Hotel[];
   loading: boolean;
   error: string | null;
 }
@@ -27,4 +28,5 @@ export interface HotelContextType extends HotelState {
   toggleHotelStatus: (id: string) => Promise<void>;
   addRoom: (hotelId: string, room: Omit<Room, 'id'>) => Promise<void>;
   toggleRoomStatus: (hotelId: string, roomId: string) => Promise<void>;
+  searchHotelsByCity: (city: string) => Promise<void>;
 }
