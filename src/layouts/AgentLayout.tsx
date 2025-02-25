@@ -12,9 +12,6 @@ export const AgentLayout = () => {
           <Link to={routes.agentHotel} className="block px-4 py-2 hover:bg-gray-700">
             Gestionar Hoteles
           </Link>
-          <Link to={routes.agentRooms} className="block px-4 py-2 hover:bg-gray-700">
-            Gestionar habitaciones
-          </Link>
           <Link to={routes.agentBooking} className="block px-4 py-2 hover:bg-gray-700">
             Reservas
           </Link>
