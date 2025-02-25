@@ -9,6 +9,7 @@ import { HotelManagement } from '../pages/agent/HotelManagement';
 import { RoomManagement } from '../pages/agent/RoomManagement';
 import { BookingList } from '../pages/agent/BookingList';
 import { HotelDetail } from '../pages/public/HotelDetail';
+import { BookingConfirmation } from '../pages/public/BookingConfirmation';
 
 export const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ export const AppRouter = () => {
           <Route path={routes.home} element={<HotelSearch />} />
           <Route path={routes.login} element={<Login />} />
           <Route path={`${routes.hotels}/:hotelId`} element={<HotelDetail />} />
+          <Route path={routes.bookingConfirmation} element={<BookingConfirmation />} />
         </Route>
 
         <Route

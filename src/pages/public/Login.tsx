@@ -36,10 +36,10 @@ export const Login = () => {
 
   return (
     <Box>
-      <Paper>
-        <Typography variant="h5">Iniciar Sesión</Typography>
+      <Typography variant="h5">Iniciar Sesión</Typography>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+        <div className="flex flex-col gap-4">
           <TextField
             fullWidth
             label="Email"
@@ -68,12 +68,11 @@ export const Login = () => {
             error={!!errors.password}
             helperText={errors.password?.message}
           />
-
           <Button type="submit" variant="contained" fullWidth>
             Iniciar Sesión
           </Button>
-        </form>
-      </Paper>
+        </div>
+      </form>
     </Box>
   );
 };
