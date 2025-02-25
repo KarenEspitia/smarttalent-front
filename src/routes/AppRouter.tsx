@@ -9,9 +9,7 @@ import { AgentLayout } from '../layouts/AgentLayout';
 import { HotelManagement } from '../pages/agent/HotelManagement';
 import { RoomManagement } from '../pages/agent/RoomManagement';
 import { BookingList } from '../pages/agent/BookingList';
-import { CustomerLayout } from '../layouts/CustomerLayout';
-import { BookingProcess } from '../pages/customer/BookingProcess';
-import { MyBookings } from '../pages/customer/MyBookings';
+import { HotelDetail } from '../pages/public/HotelDetail';
 
 export const AppRouter = () => {
   return (
@@ -21,6 +19,7 @@ export const AppRouter = () => {
           <Route path={routes.home} element={<Home />} />
           <Route path={routes.login} element={<Login />} />
           <Route path={routes.hotels} element={<HotelSearch />} />
+          <Route path={`${routes.hotels}/:hotelId`} element={<HotelDetail />} />
         </Route>
 
         <Route
@@ -36,17 +35,6 @@ export const AppRouter = () => {
             element={<RoomManagement />}
           />
           <Route path={routes.agentBooking} element={<BookingList />} />
-        </Route>
-
-        <Route
-          element={
-            <ProtectedRoute roles={['customer']}>
-              <CustomerLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path={routes.booking} element={<BookingProcess />} />
-          <Route path={routes.myBookings} element={<MyBookings />} />
         </Route>
       </Routes>
     </Router>

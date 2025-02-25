@@ -21,7 +21,7 @@ export interface Booking {
   checkIn: string;
   checkOut: string;
   guests: Guest[];
-  emergencyContact: EmergencyContact[];
+  emergencyContact: EmergencyContact;
   totalGuests: number;
 }
 

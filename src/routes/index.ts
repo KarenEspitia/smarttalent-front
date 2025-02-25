@@ -4,6 +4,5 @@ export const routes = {
   hotels: '/hotels',
   agentHotel: '/agent/hotels',
   agentBooking: '/agent/bookings',
-  booking: '/booking',
-  myBookings: '/my-bookings',
+  bookingConfirmation: '/booking-confirmation',
 };
