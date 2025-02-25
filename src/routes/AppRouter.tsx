@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from '../layouts/MainLayout';
 import { routes } from '.';
-import { Home } from '../pages/public/Home';
 import { Login } from '../pages/public/Login';
 import { HotelSearch } from '../pages/public/HotelSearch';
 import ProtectedRoute from '../components/guards/ProtectedRoute';
@@ -16,9 +15,8 @@ export const AppRouter = () => {
     <Router>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path={routes.home} element={<Home />} />
+          <Route path={routes.home} element={<HotelSearch />} />
           <Route path={routes.login} element={<Login />} />
-          <Route path={routes.hotels} element={<HotelSearch />} />
           <Route path={`${routes.hotels}/:hotelId`} element={<HotelDetail />} />
         </Route>
 

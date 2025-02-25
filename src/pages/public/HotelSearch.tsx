@@ -10,6 +10,7 @@ import {
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHotels } from '../../context/HotelContext';
+import { twMerge } from 'tailwind-merge';
 
 interface SearchFormInputs {
   city: string;
@@ -31,12 +32,10 @@ export const HotelSearch = () => {
   return (
     <div className="p-4">
       <Paper className="p-4 mb-4">
-        <Typography variant="h5" className="mb-4">
-          Buscar Hoteles
-        </Typography>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-wrap -mx-2">
-            <div className="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+        <Typography variant="h5">Buscar Hoteles</Typography>
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+          <div className="flex flex-wrap gap-4 items-center">
+            <div className="w-full md:w-1/4 mb-4 md:mb-0">
               <TextField
                 fullWidth
                 label="Ciudad"
@@ -47,7 +46,8 @@ export const HotelSearch = () => {
               <TextField
                 fullWidth
                 type="date"
-                helperText="Fecha de entrada"
+                label="Fecha de entrada"
+                InputLabelProps={{ shrink: true }}
                 {...register('checkIn')}
               />
             </div>
@@ -55,7 +55,8 @@ export const HotelSearch = () => {
               <TextField
                 fullWidth
                 type="date"
-                helperText="Fecha de salida"
+                label="Fecha de salida"
+                InputLabelProps={{ shrink: true }}
                 {...register('checkOut')}
               />
             </div>
@@ -67,8 +68,8 @@ export const HotelSearch = () => {
                 {...register('guests')}
               />
             </div>
-            <div>
-              <Button type="submit" variant="contained" fullWidth className="h-full">
+            <div className="h-full">
+              <Button type="submit" variant="contained" fullWidth>
                 Buscar
               </Button>
             </div>
@@ -83,9 +84,9 @@ export const HotelSearch = () => {
 
       <div className="flex flex-wrap -mx-3">
         {filteredHotels.map((hotel) => (
-          <div key={hotel.id} className="w-full sm:w-1/2 md:w-1/3 px-3 mb-6">
-            <Card className="h-full flex flex-col">
-              <CardContent className="flex-grow">
+          <div key={hotel.id} className="w-full sm:w-1/2 px-3 mb-6">
+            <Card className={twMerge('h-full flex flex-col')}>
+              <CardContent className={twMerge('flex-grow')}>
                 <Typography variant="h6">{hotel.name}</Typography>
                 <Typography color="textSecondary">{hotel.city}</Typography>
                 <Typography className="mt-2">

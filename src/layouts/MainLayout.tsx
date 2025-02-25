@@ -9,21 +9,16 @@ export const MainLayout = () => {
     <div className="min-h-screen flex flex-col">
       <header className="bg-white shadow">
         <nav className="mx-auto px-4 sm:px-6 lg:px-8 ">
-          <div className="flex justify-between h-16">
-            <Link to={routes.home} className="flex items-center">
+          <div className="flex justify-between items-center h-16">
+            <Link to={routes.home} className="flex">
               Inicio
             </Link>
-            <Link to={routes.hotels} className="ml-8 flex items-center">
-              Buscar Hoteles
-            </Link>
-          </div>
-          <div className="flex items-center">
             {isAuthenticated ? (
-              <button onClick={logout} className="ml-4 text-gray-700 hover:text-gray-900">
+              <button onClick={logout} className="text-gray-700 hover:text-gray-900">
                 Cerrar Sesión
               </button>
             ) : (
-              <Link to={routes.login} className="ml-4 text-gray-700 hover:text-gray-900">
+              <Link to={routes.login} className="text-gray-700 hover:text-gray-900">
                 Iniciar Sesión
               </Link>
             )}

@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { Hotel, Room } from '../../context/types/hotel.types';
 import { useBooking } from '../../context/BookingContext';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ import { GuestFormStep } from './GuestFormStep';
 import { EmergencyContactStep } from './EmergencyContactStep';
 import { ConfirmationStep } from './ConfirmationStep';
 
-interface BookingFormInputs {
+export interface BookingFormInputs {
   guests: {
     firstName: string;
     lastName: string;
@@ -56,6 +56,7 @@ export const BookingModal = ({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<BookingFormInputs>({
     defaultValues: {
@@ -84,6 +85,10 @@ export const BookingModal = ({
   const { createBooking } = useBooking();
 
   const [activeStep, setActiveStep] = useState(0);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'guests',
+  });
 
   const steps = ['Datos de huespedes', 'Contacto de emergencia', 'Confirmación'];
 
@@ -136,10 +141,8 @@ export const BookingModal = ({
           <form onSubmit={handleSubmit(onSubmit)}>
             {activeStep === 0 && (
               <div>
-                <Typography variant="h6" className="mb-2">
-                  Detalles de la reserva
-                </Typography>
-                <div className="flex flex-wrap -mx-2">
+                <Typography variant="h6">Detalles de la reserva</Typography>
+                <div className="flex flex-wrap -mx-2 mt-4">
                   <div className="w-full md:w-1/3 px-2 mb-4">
                     <TextField
                       fullWidth
@@ -176,11 +179,21 @@ export const BookingModal = ({
                 </div>
               </div>
             )}
-            {activeStep === 1 && <GuestFormStep />}
-            {activeStep === 2 && <EmergencyContactStep />}
-            {activeStep === 3 && <ConfirmationStep />}
+            {activeStep === 0 && (
+              <GuestFormStep
+                fields={fields}
+                register={register}
+                errors={errors}
+                append={append}
+                remove={remove}
+              />
+            )}
+            {activeStep === 1 && (
+              <EmergencyContactStep register={register} errors={errors} />
+            )}
+            {activeStep === 2 && <ConfirmationStep hotel={hotel} room={room} />}
             <DialogActions className="mt-4 px-0">
-              {activeStep < 0 && <Button onClick={prevStep}>Atrás</Button>}
+              {activeStep > 0 && <Button onClick={prevStep}>Atrás</Button>}
               <Button onClick={onClose}>Cancelar</Button>
               <Button type="submit">
                 {activeStep < 3 ? 'Continuar' : 'Confirmar reserva'}

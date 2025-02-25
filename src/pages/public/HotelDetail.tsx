@@ -12,6 +12,7 @@ import { Room } from '../../context/types/hotel.types';
 import { useHotels } from '../../context/HotelContext';
 import { useState } from 'react';
 import { BookingModal } from '../../components/bookings/BookingModal';
+import { twMerge } from 'tailwind-merge';
 
 export const HotelDetail = () => {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
@@ -46,43 +47,40 @@ export const HotelDetail = () => {
 
   return (
     <div className="p-4">
-      <div className="flex items-center mb-4">
-        <Button
-          variant="outlined"
-          onClick={() => navigate(`${routes.hotels}`)}
-          className="mr-4"
-        >
+      <div className="flex items-center mb-4 gap-4">
+        <Button variant="outlined" onClick={() => navigate(`${routes.hotels}`)}>
           Volver
         </Button>
         <Typography variant="h4">{hotel.name}</Typography>
       </div>
 
       <Typography variant="h6">{hotel.city}</Typography>
-      <Divider className="my-4" />
-      <Typography variant="h5" className="mb-4">
-        Habitaciones disponibles
-      </Typography>
+      <hr className="border-t border-gray-300 dark:border-gray-700 my-2" />
+      <div className="mb-4">
+        <Typography variant="h5">Habitaciones disponibles</Typography>
+      </div>
 
       <div className="flex flex-wrap mx-3">
         {hotel.rooms
           .filter((room) => room.isActive)
           .map((room) => (
-            <div className="w-full sm:w-1/2 md:w-1/3 px-3 mb-6" key={room.id}>
-              <Card className="h-full flex flex-col">
-                <CardContent className="flex-grow">
+            <div className="w-full sm:w-1/2 px-3 mb-6" key={room.id}>
+              <Card className={twMerge('h-full flex flex-col w-full')}>
+                <CardContent className={twMerge('flex-grow')}>
                   <Typography variant="h6">{room.type}</Typography>
-                  <Divider className="my-2" />
+                  <hr className="border-t border-gray-300 dark:border-gray-700 my-2" />
                   <Typography>
-                    <strong>Costo base:</strong>${room.basePrice.toFixed(2)}
+                    <strong>Costo base: </strong>$ {room.basePrice}
                   </Typography>
                   <Typography>
-                    <strong>Impuestos:</strong>${room.taxes.toFixed(2)}
+                    <strong>Impuestos: </strong>$ {room.taxes}
                   </Typography>
                   <Typography>
-                    <strong>Total:</strong>${room.basePrice + room.taxes.toFixed(2)}
+                    <strong>Total: </strong>$ {room.basePrice + room.taxes}
                   </Typography>
-                  <Typography className="mt-2">
-                    <strong>Ubicación:</strong>${room.location}
+                  <Typography>
+                    <strong>Ubicación: </strong>
+                    {room.location}
                   </Typography>
                 </CardContent>
 
