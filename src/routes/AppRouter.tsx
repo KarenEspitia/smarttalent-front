@@ -6,7 +6,6 @@ import { Login } from '../pages/public/Login';
 import { HotelSearch } from '../pages/public/HotelSearch';
 import ProtectedRoute from '../components/guards/ProtectedRoute';
 import { AgentLayout } from '../layouts/AgentLayout';
-import { Dashboard } from '../pages/agent/Dashboard';
 import { HotelManagement } from '../pages/agent/HotelManagement';
 import { RoomManagement } from '../pages/agent/RoomManagement';
 import { BookingList } from '../pages/agent/BookingList';
@@ -31,7 +30,6 @@ export const AppRouter = () => {
             </ProtectedRoute>
           }
         >
-          <Route path={routes.agentDashboard} element={<Dashboard />} />
           <Route path={routes.agentHotel} element={<HotelManagement />} />
           <Route
             path={`${routes.agentHotel}/:hotelId/rooms`}

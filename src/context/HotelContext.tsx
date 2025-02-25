@@ -1,17 +1,26 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { Hotel, HotelContextType, HotelState, Room } from './types/hotel.types';
+import { sampleHotels } from './data';
 
 const HotelContext = createContext<HotelContextType | undefined>(undefined);
 
-const initialState: HotelState = {
-  hotels: [],
-  filteredHotels: [],
-  loading: false,
-  error: null,
+const getInitialHotels = (): Hotel[] => {
+  const savedHotels = sessionStorage.getItem('hotels');
+  return savedHotels ? JSON.parse(savedHotels) : sampleHotels;
 };
 
 export const HotelProvider = ({ children }: { children: ReactNode }) => {
-  const [state, setState] = useState<HotelState>(initialState);
+  const [state, setState] = useState<HotelState>({
+    hotels: getInitialHotels(),
+    filteredHotels: [],
+    loading: false,
+    error: null,
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem('hotels', JSON.stringify(state.hotels));
+  }, [state.hotels]);
+
   const createHotel = async (hotelData: Omit<Hotel, 'id' | 'rooms' | 'isActive'>) => {
     try {
       setState({ ...state, loading: true });

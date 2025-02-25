@@ -1,16 +1,23 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { Booking, BookingContextType, BookingState } from './types/booking.types';
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
 
-const initialState: BookingState = {
-  bookings: [],
-  loading: false,
-  error: null,
+const getInitialBookings = (): Booking[] => {
+  const savedBookings = sessionStorage.getItem('bookings');
+  return savedBookings ? JSON.parse(savedBookings) : [];
 };
 
 export const BookinkProvider = ({ children }: { children: ReactNode }) => {
-  const [state, setState] = useState<BookingState>(initialState);
+  const [state, setState] = useState<BookingState>({
+    bookings: getInitialBookings(),
+    loading: false,
+    error: null,
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem('bookings', JSON.stringify(state.bookings));
+  }, [state.bookings]);
 
   const createBooking = async (booking: Omit<Booking, 'id'>) => {
     try {

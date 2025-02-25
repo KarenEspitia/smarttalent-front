@@ -25,7 +25,7 @@ export const Login = () => {
       const isAgentUser = user?.role === 'agent';
 
       if (isAgentUser) {
-        navigate(routes.agentDashboard);
+        navigate(routes.agentHotel);
       } else {
         navigate(routes.home);
       }

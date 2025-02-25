@@ -37,6 +37,7 @@ export const HotelForm = ({ hotel, onClose }: HotelFormProps) => {
       } else {
         createHotel(data);
       }
+      onClose();
     } catch (error) {
       console.error('Error: ', error);
     }

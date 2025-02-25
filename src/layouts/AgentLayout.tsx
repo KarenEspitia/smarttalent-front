@@ -6,9 +6,6 @@ export const AgentLayout = () => {
     <div className="min-h-screen flex">
       <aside className="w-64 bg-gray-800 text-white">
         <nav className="mt-8">
-          <Link to={routes.agentDashboard} className="block px-4 py-2 hover:bg-gray-700">
-            Dashboard
-          </Link>
           <Link to={routes.agentHotel} className="block px-4 py-2 hover:bg-gray-700">
             Gestionar Hoteles
           </Link>
