@@ -1,11 +1,4 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Divider,
-  Typography,
-} from '@mui/material';
+import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from '../../routes/index';
 import { Room } from '../../context/types/hotel.types';
