@@ -41,7 +41,7 @@ export const HotelDetail = () => {
   return (
     <div className="p-4">
       <div className="flex items-center mb-4 gap-4">
-        <Button variant="outlined" onClick={() => navigate(`${routes.hotels}`)}>
+        <Button variant="outlined" onClick={() => navigate(`${routes.home}`)}>
           Volver
         </Button>
         <Typography variant="h4">{hotel.name}</Typography>
