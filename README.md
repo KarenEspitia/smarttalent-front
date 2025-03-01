@@ -5,7 +5,7 @@ Este proyecto es una solución para la prueba técnica frontend que implementa u
 ## 🌐 Demo en vivo
 
 El proyecto está desplegado y disponible para su uso en:
-[https://smarttalent-front-clawfesj6-karens-projects-75a0d8ea.vercel.app/](https://smarttalent-front-clawfesj6-karens-projects-75a0d8ea.vercel.app/)
+[https://smarttalent-front.vercel.app//](https://smarttalent-front.vercel.app/)
 
 ## 🚀 Características principales
 
